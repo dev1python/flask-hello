@@ -25,3 +25,21 @@ python -m unittest test_app.py
 | --- | --- |
 | `/` | A short hello message |
 | `/health` | `{"status": "ok"}` |
+
+## Docker image
+
+The publish workflow builds this repository and pushes:
+
+```text
+yogenjadeja/flask-hello:1.0.0
+```
+
+The version comes from `version.txt`. On GitHub, the repository needs:
+
+| Name | Kind | Value |
+| --- | --- | --- |
+| `DOCKERHUB_NAMESPACE` | Variable | `yogenjadeja` |
+| `DOCKERHUB_USERNAME` | Secret | Docker Hub username |
+| `DOCKERHUB_TOKEN` | Secret | Docker Hub access token |
+
+Run the **Docker Publish** workflow manually, or merge a pull request into `main`.

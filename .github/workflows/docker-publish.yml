@@ -1,0 +1,19 @@
+name: Docker Publish
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: docker-publish-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docker-publish:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    uses: dev1python/github-actions/.github/workflows/docker-publish-reusable.yml@main
+    with:
+      ref: ${{ github.sha }}
+    secrets: inherit
